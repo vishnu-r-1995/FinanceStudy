@@ -7,7 +7,7 @@ public class MutualFundEngine {
 	public static void main(String[] args) {
 		displaySIPPrincipalOnMaturity(12, 24, new BigDecimal(2000.0));
 		displayYearlySIPPrincipalOnMaturity(12.0, 22, new BigDecimal(100000.0));
-		displayPredictedPriceAfterSpecifiedTimePeriodWithInflation(new BigDecimal(5000000), 7.0, 15);
+		displayPredictedPriceAfterSpecifiedTimePeriodWithInflation(new BigDecimal(50000), 7.0, 15);
 	}
 
 	private static void displaySIPPrincipalOnMaturity(double interest, int numberOfInstallments, BigDecimal investmentPerMonth) 
