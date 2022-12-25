@@ -7,6 +7,7 @@ public class MutualFundEngine {
 	public static void main(String[] args) {
 		displaySIPPrincipalOnMaturity(12, 24, new BigDecimal(2000.0));
 		displayYearlySIPPrincipalOnMaturity(12.0, 22, new BigDecimal(100000.0));
+		displayPredictedPriceAfterSpecifiedTimePeriodWithInflation(new BigDecimal(5000000), 7.0, 15);
 	}
 
 	private static void displaySIPPrincipalOnMaturity(double interest, int numberOfInstallments, BigDecimal investmentPerMonth) 
@@ -48,5 +49,16 @@ public class MutualFundEngine {
 	{
 		BigDecimal denominator = new BigDecimal(100);
 		return new BigDecimal(interest).multiply(principal).divide(denominator);
+	}
+	
+	private static void displayPredictedPriceAfterSpecifiedTimePeriodWithInflation(BigDecimal amount, double interest,
+			int numberOfYears) 
+	{
+		BigDecimal predictedAmount = amount;
+		for (int i = 0; i < numberOfYears; i++) {
+			predictedAmount = predictedAmount.add(getYearlyInterestAsBigDecimal(interest, predictedAmount));
+		}
+		System.out.println("Predicted amount at the end of " + numberOfYears + " years at inflation of " + interest
+				+ "% = " + Math.round(predictedAmount.doubleValue()));
 	}
 }
