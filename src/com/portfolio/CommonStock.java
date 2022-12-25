@@ -26,6 +26,11 @@ public class CommonStock {
 		this.downsideTargetPrice = getDownsideTargetPrice(currentPrice, upsideTargetPrice, riskRewardRatio);
 	}
 
+	public BigDecimal getDownsideTargetPrice() 
+	{
+		return downsideTargetPrice;
+	}
+
 	public double getRiskRewardRatio(BigDecimal current, BigDecimal upside, BigDecimal downside) 
 	{
 		// (upside-current)/(current-downside) = risk-reward ratio
@@ -37,7 +42,7 @@ public class CommonStock {
 		return numerator.divide(denominator).doubleValue();
 	}
 	
-	private BigDecimal getDownsideTargetPrice(BigDecimal current, BigDecimal upside, double riskReward) 
+	public BigDecimal getDownsideTargetPrice(BigDecimal current, BigDecimal upside, double riskReward) 
 	{
 		// (upside-current)/(current-downside) = risk-reward ratio
 		// Some investors won't commit their money to any investment that isn't at least
