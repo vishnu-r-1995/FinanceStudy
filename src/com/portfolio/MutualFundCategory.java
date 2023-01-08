@@ -1,0 +1,10 @@
+package com.portfolio;
+
+public enum MutualFundCategory {
+	UNCATEGORIZED,
+	LARGECAPFUND,
+	MULTICAPFUND,
+	LARGEANDMIDCAPFUND,
+	MIDCAPFUND,
+	SMALLCAPFUND;
+}
