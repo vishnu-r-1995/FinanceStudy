@@ -5,7 +5,8 @@ import java.math.BigDecimal;
 public class FinanceEngine {
 
 	public static void main(String[] args) {
-		displayPriceOfAnItemAtSpecifiedYear(new BigDecimal(100.00), 1960, 1961, 7.5);
+		displayPriceOfAnItemAtSpecifiedYear(new BigDecimal(50000), 2023, 2035, 7.5);
+		displayAmountNeededAfterRetirement(new BigDecimal(50000), 2023, 2035, 10, 7.5);
 	}
 
 	private static void displayPriceOfAnItemAtSpecifiedYear(BigDecimal currentPrice, int currentYear, int targetYear, double inflationPercentage) 
@@ -22,4 +23,33 @@ public class FinanceEngine {
 				Double.toString(targetPrice.doubleValue()), "at the beginning of", Integer.toString(targetYear)));
 	}
 
+	private static void displayAmountNeededAfterRetirement(BigDecimal currentMonthlyExpense, int currentYear,
+			int yearOfRetirement, int numberOfYearsAfterRetirement, double inflationPercentage) 
+	{
+		int numberOfYearsTillRetirement = yearOfRetirement - currentYear;
+		double inflationValue = inflationPercentage / 100;
+		BigDecimal monthlyExpenseAtTheTimeOfRetirement = currentMonthlyExpense;
+
+		for (int i = 0; i < numberOfYearsTillRetirement; i++) 
+		{
+			BigDecimal increaseInPriceUnderInflation = new BigDecimal(inflationValue)
+					.multiply(monthlyExpenseAtTheTimeOfRetirement);
+			monthlyExpenseAtTheTimeOfRetirement = monthlyExpenseAtTheTimeOfRetirement
+					.add(increaseInPriceUnderInflation);
+		}
+
+		BigDecimal monthlyExpenseAfterRetirement = monthlyExpenseAtTheTimeOfRetirement;
+		BigDecimal amountNeededAfterRetirement = new BigDecimal(1.0);
+
+		for (int i = 0; i < numberOfYearsAfterRetirement; i++) 
+		{
+			BigDecimal increaseInPriceUnderInflation = new BigDecimal(inflationValue)
+					.multiply(monthlyExpenseAfterRetirement);
+			monthlyExpenseAfterRetirement = monthlyExpenseAfterRetirement.add(increaseInPriceUnderInflation);
+			BigDecimal yearlyExpense = monthlyExpenseAfterRetirement.multiply(new BigDecimal(12.0));
+			amountNeededAfterRetirement = amountNeededAfterRetirement.add(yearlyExpense);
+		}
+		System.out.println("Amount Needed After Retirement: " + amountNeededAfterRetirement.doubleValue());
+		//todo - Display amount is not properly formatted
+	}
 }
